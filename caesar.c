@@ -51,8 +51,8 @@ string changeToCiphertext(string plaintext, int k)
     int lentgh = strLen(plaintext);
     
     for (int i = 0; i < lentgh; i++) {
-        int keyAdded = plaintext[i] + (k % 26);
         int k26 = k % 26;
+        int keyAdded = plaintext[i] + k26;
         if (plaintext[i] >= 97 && plaintext[i] <= 122) {
            if (keyAdded > 122) {
             int leftReminder = 122 - plaintext[i];
