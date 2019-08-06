@@ -46,20 +46,28 @@ bool isInteger(string dupa) {
 
 string changeToCiphertext(string plaintext, int k) {
     int lentgh = strLen(plaintext);
+    
     for (int i = 0; i < lentgh; i++) {
         int keyAdded = plaintext[i] + k;
-        if (keyAdded > 122) {
+        if (plaintext[i] >= 97 && plaintext[i] <= 122) {
+           if (keyAdded > 122) {
             int leftReminder = 122 - plaintext[i];
             int rightReminder = k - leftReminder - 1;
             plaintext[i] = 97 + rightReminder;
-        } else if (keyAdded > 90) {
+           } else {
+            plaintext[i] = keyAdded;
+           }
+        } else if (plaintext[i] >= 65 && plaintext[i] <= 90) {
+            if (keyAdded > 90) {
             int leftReminder = 90 - plaintext[i];
             int rightReminder = k - leftReminder - 1;
             plaintext[i] = 65 + rightReminder;
-        } else {
+            } else {
             plaintext[i] = keyAdded;
-        }
-//         
+            }
+        } else {
+            plaintext[i] = plaintext[i];
+        } 
     }
-    return plaintext;
+    return plaintext;          
 }
