@@ -22,7 +22,8 @@ int main(int argc, string argv[])
     }
 }
 
-int strLen(string s) {
+int strLen(string s) 
+{
     int n = 0;
     for (int i = 0; s[i] != '\0'; i++) {
         n++;
@@ -30,7 +31,8 @@ int strLen(string s) {
     return n;
 }
 
-bool isInteger(string dupa) {
+bool isInteger(string dupa) 
+{
     int lentgh = strLen(dupa);
     for (int i = 0; i < lentgh; i++) {
         if (i == 0 && (int) dupa[0] == 48) {
@@ -44,23 +46,25 @@ bool isInteger(string dupa) {
     return true;
 }
 
-string changeToCiphertext(string plaintext, int k) {
+string changeToCiphertext(string plaintext, int k)
+{
     int lentgh = strLen(plaintext);
     
     for (int i = 0; i < lentgh; i++) {
-        int keyAdded = plaintext[i] + k;
+        int keyAdded = plaintext[i] + (k % 26);
+        int k26 = k % 26;
         if (plaintext[i] >= 97 && plaintext[i] <= 122) {
            if (keyAdded > 122) {
             int leftReminder = 122 - plaintext[i];
-            int rightReminder = k - leftReminder - 1;
+            int rightReminder = k26 - leftReminder - 1;
             plaintext[i] = 97 + rightReminder;
            } else {
             plaintext[i] = keyAdded;
            }
-        } else if (plaintext[i] >= 65 && plaintext[i] <= 90) {
+        } else if (plaintext[i] >= 65 && plaintext[i] <= 90){
             if (keyAdded > 90) {
             int leftReminder = 90 - plaintext[i];
-            int rightReminder = k - leftReminder - 1;
+            int rightReminder = k26 - leftReminder - 1;
             plaintext[i] = 65 + rightReminder;
             } else {
             plaintext[i] = keyAdded;
