@@ -51,17 +51,17 @@ string changeToCiphertext(string plaintext, int k)
     int lentgh = strLen(plaintext);
     
     for (int i = 0; i < lentgh; i++) {
-        int k26 = k % 26;
-        int keyAdded = plaintext[i] + k26;
-        if (plaintext[i] >= 97 && plaintext[i] <= 122) {
-           if (keyAdded > 122) {
-            int leftReminder = 122 - plaintext[i];
-            int rightReminder = k26 - leftReminder - 1;
+        int k26 = k % 26; // sprawdzenie czy kluczy szyfrujący nie przesunie się poza alfabet, który ma 26 liter
+        int keyAdded = plaintext[i] + k26; // bazowy kod zaszyfrowanego znaku, który należy poniżej sprawdzić czy mieści się w alfabecie
+        if (plaintext[i] >= 97 && plaintext[i] <= 122) { // jeżeli plaintext[i] mieści się w alfabecie małych liter
+           if (keyAdded > 122) { // jeżeli keyadded wyskoczyło poza alfabet
+            int leftReminder = 122 - plaintext[i]; // policz różnice między ostatnią literką alfabetu z lewej strony i naszym znakiem który chcemy zaszyfrować 
+            int rightReminder = k26 - leftReminder - 1; // policz róznicę między ilością znaków o jaką musimy zaszyfrować plaintext[i] a ilością znaków z poprzedniej strony alfabetu pomniejszoną o 1
             plaintext[i] = 97 + rightReminder;
-           } else {
-            plaintext[i] = keyAdded;
+           } else { // gdy nie wyszliśmy poza alfabet
+            plaintext[i] = keyAdded; 
            }
-        } else if (plaintext[i] >= 65 && plaintext[i] <= 90){
+        } else if (plaintext[i] >= 65 && plaintext[i] <= 90){ // jeżeli plaintext[i] miesci się w alfabefie wielkich liter
             if (keyAdded > 90) {
             int leftReminder = 90 - plaintext[i];
             int rightReminder = k26 - leftReminder - 1;
