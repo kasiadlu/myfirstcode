@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include "cs50.h"
 #include <string.h>
+#include "math.h"
 
 void program();
 
@@ -24,16 +25,12 @@ int main(void) {
 }
 
 void program() {
-	int lines = get_int("Number of lines: ");
-	int characters = get_int("Number of characters: ");
-
-	int tempNumberOfCharacters = 0;
-	for(int i = 0; i < lines; i++) {
-		for(int j = 0; j < characters; j++) {
-			tempNumberOfCharacters = tempNumberOfCharacters + 1;
-			printf("%d ", tempNumberOfCharacters);
+	int number = get_int("Enter a number: ");
+	int absoluteNumber = abs(number);
+	for (int divisor = 1; divisor <= absoluteNumber; divisor++) {
+		if(absoluteNumber % divisor == 0) {
+			printf("%d\n", divisor);
 		}
-	printf("\n");
 	}
 }
 
